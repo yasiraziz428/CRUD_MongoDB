@@ -20,25 +20,37 @@ const fruitSchema = new mongoose.Schema({
 });
 const Fruit = mongoose.model("Fruit", fruitSchema);
 const fruit = new Fruit({
-  name: "Strawberry",
+  name: "Mango",
   rating: 5,
-  review: "Worst experience. Never buy this!",
+  review: "Recommend!",
 });
-fruit.save();
+// fruit.save();
 
 //Person Collection
 const personSchema = new mongoose.Schema({
   name: String,
   age: Number,
-  favouriteFruit: fruitSchema, // creating relationship
 });
 const Person = mongoose.model("Person", personSchema);
 const person = new Person({
-  name: "John",
-  age: 37,
-  favouriteFruit: fruit,
+  name: "Yasir",
+  age: 22,
 });
-person.save();
+// person.save();
+
+//Order Collection
+const orderSchema = new mongoose.Schema({
+  person: personSchema, // creating relationship
+  fruit: fruitSchema,
+});
+
+const Order = mongoose.model("Order", orderSchema);
+
+const order = new Order({
+  person: person,
+  fruit: fruit,
+});
+// order.save();
 
 //Inserting many documents to Fruit Collection
 const Kiwi = {
